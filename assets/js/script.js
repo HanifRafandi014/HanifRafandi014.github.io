@@ -142,3 +142,28 @@ addEventOnElements(hoveredElements, "mouseout", function () {
     cursors[i].classList.remove("hovered");
   }
 });
+
+document.getElementById('downloadBtn').addEventListener('click', function() {
+  // Simulate a click on the hidden file input
+  document.getElementById('cvInput').click();
+});
+
+document.getElementById('cvInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  
+  if (file) {
+    // Create a link element
+    const downloadLink = document.createElement('a');
+    downloadLink.href = URL.createObjectURL(file);
+    downloadLink.download = 'myDownloadedFile.pdf';
+    
+    // Append the link to the document
+    document.body.appendChild(downloadLink);
+    
+    // Trigger a click on the link to start the download
+    downloadLink.click();
+    
+    // Remove the link from the document
+    document.body.removeChild(downloadLink);
+  }
+});
